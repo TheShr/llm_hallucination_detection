@@ -1,0 +1,32 @@
+[
+  {
+    "id": "doc-1",
+    "title": "Large language models",
+    "text": "Large language models are a class of artificial intelligence systems that are trained on massive text corpora and can generate human-like text.",
+    "metadata": {"source": "Wikipedia"}
+  },
+  {
+    "id": "doc-2",
+    "title": "Retrieval augmented generation",
+    "text": "Retrieval-augmented generation is a hybrid approach where a language model uses external documents retrieved from a knowledge base to improve accuracy.",
+    "metadata": {"source": "Wikipedia"}
+  },
+  {
+    "id": "doc-3",
+    "title": "Hallucination in AI",
+    "text": "Model hallucination occurs when a model produces factually incorrect or unsupported statements that are not grounded in the input data.",
+    "metadata": {"source": "Wikipedia"}
+  },
+  {
+    "id": "doc-4",
+    "title": "Semantic similarity",
+    "text": "Semantic similarity measures the proximity of meaning between two pieces of text using embeddings or vector-based comparisons.",
+    "metadata": {"source": "Wikipedia"}
+  },
+  {
+    "id": "doc-5",
+    "title": "BM25 ranking",
+    "text": "BM25 is a ranking function used by search engines to rank matching documents according to query relevance.",
+    "metadata": {"source": "Wikipedia"}
+  }
+]

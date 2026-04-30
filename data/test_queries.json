@@ -1,0 +1,14 @@
+[
+  {
+    "query": "What is retrieval-augmented generation?",
+    "relevant_ids": ["doc-2"]
+  },
+  {
+    "query": "What causes model hallucination?",
+    "relevant_ids": ["doc-3"]
+  },
+  {
+    "query": "How does BM25 rank documents?",
+    "relevant_ids": ["doc-5"]
+  }
+]
