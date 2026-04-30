@@ -1,14 +1,38 @@
 [
   {
     "query": "What is retrieval-augmented generation?",
-    "relevant_ids": ["doc-2"]
+    "relevant_ids": ["doc-2"],
+    "expected_hallucination": false,
+    "answer": "Retrieval-augmented generation is a hybrid approach where a language model uses external documents retrieved from a knowledge base to improve accuracy."
   },
   {
     "query": "What causes model hallucination?",
-    "relevant_ids": ["doc-3"]
+    "relevant_ids": ["doc-3"],
+    "expected_hallucination": false,
+    "answer": "Model hallucination occurs when a model produces factually incorrect or unsupported statements that are not grounded in the input data."
   },
   {
     "query": "How does BM25 rank documents?",
-    "relevant_ids": ["doc-5"]
+    "relevant_ids": ["doc-5"],
+    "expected_hallucination": false,
+    "answer": "BM25 is a ranking function used by search engines to rank matching documents according to query relevance."
+  },
+  {
+    "query": "Did Thomas Edison invent the first computer?",
+    "relevant_ids": [],
+    "expected_hallucination": true,
+    "answer": "Thomas Edison invented the first computer."
+  },
+  {
+    "query": "Is Apple a fruit or a company?",
+    "relevant_ids": ["doc-6", "doc-7"],
+    "expected_hallucination": false,
+    "answer": "Apple can refer to the technology company Apple Inc. or the fruit produced by an apple tree."
+  },
+  {
+    "query": "The sun revolves around the earth.",
+    "relevant_ids": [],
+    "expected_hallucination": true,
+    "answer": "The sun revolves around the earth."
   }
 ]

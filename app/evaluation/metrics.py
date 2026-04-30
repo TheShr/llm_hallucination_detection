@@ -1,4 +1,4 @@
-from typing import List
+from typing import Dict, List
 
 from app.utils.types import RetrievalResult
 
@@ -20,3 +20,25 @@ def grounding_score(answer: str, sources: List[RetrievalResult]) -> float:
         return 0.0
     overlap = len(answer_tokens & source_tokens)
     return overlap / len(answer_tokens)
+
+
+def detection_precision_recall(predictions: List[bool], labels: List[bool]) -> Dict[str, float]:
+    """Compute detection precision and recall for hallucination classification."""
+    true_positive = sum(1 for pred, label in zip(predictions, labels) if pred and label)
+    false_positive = sum(1 for pred, label in zip(predictions, labels) if pred and not label)
+    false_negative = sum(1 for pred, label in zip(predictions, labels) if not pred and label)
+    precision = true_positive / (true_positive + false_positive) if (true_positive + false_positive) else 0.0
+    recall = true_positive / (true_positive + false_negative) if (true_positive + false_negative) else 0.0
+    f1 = 2 * precision * recall / (precision + recall) if (precision + recall) else 0.0
+    return {"precision": precision, "recall": recall, "f1": f1}
+
+
+def confidence_statistics(confidences: List[float]) -> Dict[str, float]:
+    """Compute basic confidence statistics for answer validation."""
+    if not confidences:
+        return {"mean": 0.0, "min": 0.0, "max": 0.0}
+    return {
+        "mean": sum(confidences) / len(confidences),
+        "min": min(confidences),
+        "max": max(confidences),
+    }

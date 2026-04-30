@@ -28,5 +28,17 @@
     "title": "BM25 ranking",
     "text": "BM25 is a ranking function used by search engines to rank matching documents according to query relevance.",
     "metadata": {"source": "Wikipedia"}
+  },
+  {
+    "id": "doc-6",
+    "title": "Apple Inc",
+    "text": "Apple Inc. is a technology company known for the iPhone, iPad, and Mac computers.",
+    "metadata": {"source": "Wikipedia"}
+  },
+  {
+    "id": "doc-7",
+    "title": "Apple fruit",
+    "text": "An apple is a sweet fruit produced by the apple tree and is commonly eaten fresh or used in cooking.",
+    "metadata": {"source": "Wikipedia"}
   }
 ]
