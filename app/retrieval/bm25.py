@@ -13,7 +13,14 @@ class BM25Retriever:
         self.documents = documents
         self.tokenized_corpus = [doc["text"].split() for doc in documents]
         self.bm25 = BM25Okapi(self.tokenized_corpus)
-        self._cached_retrieve = lru_cache(maxsize=128)(self._retrieve_impl)
+        self._cached_retrieve = self._make_cached_retrieve()
+
+    def _make_cached_retrieve(self):
+        @lru_cache(maxsize=128)
+        def cached(query: str, top_n: int) -> List[RetrievalResult]:
+            return self._retrieve_impl(query, top_n)
+
+        return cached
 
     def _retrieve_impl(self, query: str, top_n: int) -> List[RetrievalResult]:
         scores = self.bm25.get_scores(query.split())

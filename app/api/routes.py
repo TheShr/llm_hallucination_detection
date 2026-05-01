@@ -34,7 +34,7 @@ async def _run_query(query: str) -> Dict[str, Any]:
     retrieval_context = hybrid_retriever.get_context(query, top_n=5)
 
     answer = await anyio.to_thread.run_sync(llm.generate, query, retrieval_context)
-    hallucination, confidence_score = await anyio.to_thread.run_sync(verifier.verify, answer, sources)
+    hallucination, confidence_score = await anyio.to_thread.run_sync(lambda: verifier.verify(answer, sources))
 
     payload = {
         "answer": answer,

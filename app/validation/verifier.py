@@ -84,14 +84,11 @@ class HallucinationVerifier:
             "overlap": 0.25,
             "nli": 0.25 if settings.use_nli_verification else 0.0,
         }
-        confidence = 0.0
-        total_weight = 0.0
-        for name, value in metrics.items():
-            weight = weights.get(name, 0.0)
-            confidence += weight * value
-            total_weight += weight
+        active_weights = {name: value for name, value in weights.items() if value > 0.0}
+        confidence = sum(active_weights.get(name, 0.0) * metrics.get(name, 0.0) for name in active_weights)
+        total_weight = sum(active_weights.values())
 
-        if total_weight == 0:
+        if total_weight == 0.0:
             return 0.0
         return min(1.0, confidence / total_weight)
 

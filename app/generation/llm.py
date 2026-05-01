@@ -20,7 +20,10 @@ class LLMGenerator:
         if settings.openai_api_key and openai is not None:
             openai.api_key = settings.openai_api_key
             if settings.openai_api_base:
-                openai.api_base = settings.openai_api_base
+                if hasattr(openai, "base_url"):
+                    openai.base_url = settings.openai_api_base
+                else:
+                    openai.api_base = settings.openai_api_base
 
     def generate(self, question: str, context: str, max_tokens: int = 250) -> str:
         """Generate an answer given a question and supporting context."""

@@ -21,6 +21,13 @@ class VectorStore:
         self.id_to_doc: Dict[int, Document] = {}
         self._build_index()
 
+    def _make_cached_search(self):
+        @lru_cache(maxsize=128)
+        def cached(query: str, top_k: int) -> List[RetrievalResult]:
+            return self._search_impl(query, top_k)
+
+        return cached
+
     def _build_index(self) -> None:
         texts = [doc["text"] for doc in self.documents]
         logger.info("Encoding %d documents for FAISS index", len(texts))
@@ -29,7 +36,7 @@ class VectorStore:
         self.index = faiss.IndexFlatIP(dim)
         self.index.add(embeddings)
         self.id_to_doc = {idx: doc for idx, doc in enumerate(self.documents)}
-        self._cached_search = lru_cache(maxsize=128)(self._search_impl)
+        self._cached_search = self._make_cached_search()
         logger.info("FAISS index built with dimension %d", dim)
 
     def _search_impl(self, query: str, top_k: int) -> List[RetrievalResult]:

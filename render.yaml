@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: llm-hallucination-detection
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.api.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENAI_API_KEY
+      - key: OPENAI_MODEL
+      - key: OPENAI_API_BASE
+      - key: USE_NLI_VERIFICATION
+      - key: NLI_MODEL
+      - key: BM25_TOP_N
+      - key: RAG_TOP_K
+      - key: BACKEND_URL

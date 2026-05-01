@@ -16,7 +16,14 @@ class HybridRetriever:
         self.vector = VectorStore(documents)
         self.bm25_top_n = bm25_top_n
         self.vector_top_k = vector_top_k
-        self._cached_retrieve = lru_cache(maxsize=128)(self._retrieve_impl)
+        self._cached_retrieve = self._make_cached_retrieve()
+
+    def _make_cached_retrieve(self):
+        @lru_cache(maxsize=128)
+        def cached(query: str) -> List[RetrievalResult]:
+            return self._retrieve_impl(query)
+
+        return cached
 
     @staticmethod
     def _normalize_scores(results: List[RetrievalResult]) -> List[RetrievalResult]:
